@@ -42,9 +42,9 @@ export const ProcessRail: React.FC<ProcessRailProps> = ({ currentLang }) => {
   ];
 
   return (
-    <section id="process" className="py-12 border-y border-[#DEDFDA] bg-[#FFFFFF] relative overflow-hidden">
+    <section id="process" className="py-12 border-b border-[#202636] bg-[#0B0E14] relative overflow-hidden text-[#F3F4F6]">
       {/* Subtle tech background line */}
-      <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#DEDFDA] to-transparent pointer-events-none hidden lg:block"></div>
+      <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#262E40] to-transparent pointer-events-none hidden lg:block"></div>
 
       <div className="max-w-[1240px] mx-auto px-4 sm:px-6 relative">
         {/* Desktop Process Rail (4 columns in line with arrows) */}
@@ -55,35 +55,35 @@ export const ProcessRail: React.FC<ProcessRailProps> = ({ currentLang }) => {
             return (
               <div
                 key={idx}
-                className="relative group p-4 rounded-[10px] bg-[#F7F6F2]/30 hover:bg-[#FFFFFF] border border-transparent hover:border-[#3156D9]/30 hover:shadow-xs transition-all duration-200"
+                className="relative group p-4 rounded-[10px] bg-[#121620] hover:bg-[#161B26] border border-[#202636] hover:border-[#3156D9] shadow-sm transition-all duration-200"
               >
                 <div className="flex items-center justify-between mb-2.5">
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-[5px] bg-[#FFFFFF] border border-[#DEDFDA] group-hover:border-[#3156D9] group-hover:bg-[#3156D9]/5 flex items-center justify-center transition-colors">
-                      <Icon className="w-3.5 h-3.5 text-[#3156D9]" />
+                    <div className="w-6 h-6 rounded-[5px] bg-[#181D2A] border border-[#2D3548] group-hover:border-[#3156D9] group-hover:bg-[#3156D9]/15 flex items-center justify-center transition-colors">
+                      <Icon className="w-3.5 h-3.5 text-[#60A5FA]" />
                     </div>
-                    <span className="font-mono text-xs font-bold tracking-wider text-[#3156D9]">
+                    <span className="font-mono text-xs font-bold tracking-wider text-[#60A5FA]">
                       {step.tag}
                     </span>
                   </div>
 
                   {idx < steps.length - 1 && (
-                    <div className="hidden lg:block text-[#C8CAC4] group-hover:text-[#3156D9] transition-colors">
+                    <div className="hidden lg:block text-[#3B4660] group-hover:text-[#60A5FA] transition-colors">
                       <ChevronRight className="w-4 h-4" />
                     </div>
                   )}
                 </div>
 
-                <h3 className="font-display text-base font-bold text-[#111318] mb-1.5 group-hover:text-[#3156D9] transition-colors">
+                <h3 className="font-display text-base font-bold text-white mb-1.5 group-hover:text-[#60A5FA] transition-colors">
                   {step.title}
                 </h3>
 
-                <p className="text-xs text-[#6B7078] leading-relaxed mb-3">
+                <p className="text-xs text-[#94A3B8] leading-relaxed mb-3">
                   {step.desc}
                 </p>
 
                 {/* Micro tech expression */}
-                <div className="pt-2 border-t border-[#DEDFDA]/50 text-[10px] font-mono text-[#969AA1] group-hover:text-[#3156D9] transition-colors truncate">
+                <div className="pt-2 border-t border-[#202636] text-[10px] font-mono text-[#64748B] group-hover:text-[#CBD5E1] transition-colors truncate">
                   <code>&gt; {step.code}</code>
                 </div>
               </div>

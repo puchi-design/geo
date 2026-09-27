@@ -56,23 +56,23 @@ export const PipelineSection: React.FC<PipelineSectionProps> = ({ currentLang })
   ];
 
   return (
-    <section id="pipeline" className="py-16 md:py-24 bg-[#FFFFFF] border-t border-[#DEDFDA]">
+    <section id="pipeline" className="py-16 md:py-24 bg-[#0E121B] text-[#F3F4F6] border-b border-[#202636]">
       <div className="max-w-[1240px] mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="max-w-2xl mb-12">
-          <div className="inline-flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-wider text-[#3156D9] mb-2 px-2.5 py-1 rounded bg-[#3156D9]/8 border border-[#3156D9]/20">
+          <div className="inline-flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-wider text-[#60A5FA] mb-2 px-2.5 py-1 rounded bg-[#161B26] border border-[#2D3548]">
             <span className="w-1.5 h-1.5 rounded-full bg-[#3156D9]"></span>
             ENGINEERING PIPELINE
           </div>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#111318] tracking-tight mb-3">
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight mb-3">
             {t.title}
           </h2>
-          <p className="text-sm sm:text-base text-[#4B515D] leading-relaxed">
+          <p className="text-sm sm:text-base text-[#94A3B8] leading-relaxed">
             {t.subtitle}
           </p>
         </div>
 
-        {/* Pipeline Grid */}
+        {/* 6-step Rail (Linear DevTools Grid Style) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {pipeline.map((item, idx) => {
             const Icon = item.icon;
@@ -81,60 +81,66 @@ export const PipelineSection: React.FC<PipelineSectionProps> = ({ currentLang })
             return (
               <div
                 key={item.id}
-                className={`relative border rounded-[10px] p-5 transition-all ${
+                className={`relative border rounded-[10px] p-5 flex flex-col justify-between transition-all ${
                   isLive
-                    ? 'border-[#DEDFDA] bg-[#FFFFFF] shadow-xs'
-                    : 'border-[#DEDFDA]/70 bg-[#F7F6F2]/50'
+                    ? 'border-[#263147] bg-[#141824] hover:border-[#3156D9] shadow-sm'
+                    : 'border-[#1E2433] bg-[#0F131C] opacity-80'
                 }`}
               >
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-2">
-                    <span className="font-mono text-xs font-bold text-[#6B7078]">
-                      0{idx + 1}
-                    </span>
-                    <Icon className={`w-4 h-4 ${isLive ? 'text-[#3156D9]' : 'text-[#969AA1]'}`} />
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2.5">
+                      <div
+                        className={`w-8 h-8 rounded-[6px] flex items-center justify-center ${
+                          isLive
+                            ? 'bg-[#182030] text-[#60A5FA] border border-[#2D3850]'
+                            : 'bg-[#141720] text-[#64748B] border border-[#1E2433]'
+                        }`}
+                      >
+                        <Icon className="w-4 h-4" />
+                      </div>
+                      <span className="font-mono text-xs text-[#64748B]">
+                        0{idx + 1}
+                      </span>
+                    </div>
+
+                    {isLive ? (
+                      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[4px] bg-[#10B981]/15 text-[#34D399] border border-[#10B981]/30 text-[10px] font-mono font-bold uppercase tracking-wider">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span>
+                        {t.liveBadge}
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[4px] bg-[#181D2A] text-[#94A3B8] border border-[#262E40] text-[10px] font-mono font-medium uppercase tracking-wider">
+                        <Clock className="w-2.5 h-2.5" />
+                        {t.comingBadge}
+                      </span>
+                    )}
                   </div>
 
-                  {isLive ? (
-                    <span className="text-[10px] font-mono font-bold uppercase text-[#39735B] bg-[#39735B]/10 px-2 py-0.5 rounded-[4px] flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#39735B]"></span>
-                      {t.liveBadge}
-                    </span>
-                  ) : (
-                    <span className="text-[10px] font-mono font-semibold uppercase text-[#6B7078] bg-[#DEDFDA] px-2 py-0.5 rounded-[4px]">
-                      {t.comingBadge}
-                    </span>
-                  )}
+                  <h3 className="font-display text-base font-bold text-white mb-2">
+                    {item.label}
+                  </h3>
+
+                  <p className="text-xs text-[#94A3B8] leading-relaxed mb-4">
+                    {item.desc}
+                  </p>
                 </div>
 
-                <h3 className="text-base font-semibold text-[#111318] mb-2">
-                  {item.label}
-                </h3>
-
-                <p className="text-xs text-[#6B7078] leading-relaxed mb-3">
-                  {item.desc}
-                </p>
-
-                <div className="pt-2 border-t border-[#F1F1EE] flex items-center text-[11px] font-mono">
+                <div className="pt-3 border-t border-[#1E2433] flex items-center justify-between text-[11px] font-mono">
                   {isLive ? (
-                    <span className="text-[#3156D9] font-medium flex items-center gap-1">
-                      Production ready <ArrowRight className="w-3 h-3" />
+                    <span className="text-[#34D399] font-medium flex items-center gap-1">
+                      <span>Live in Engine</span>
+                      <ArrowRight className="w-3 h-3" />
                     </span>
                   ) : (
-                    <span className="text-[#969AA1] flex items-center gap-1">
-                      <Clock className="w-3 h-3" /> In specification
+                    <span className="text-[#64748B]">
+                      Phase 2 Spec
                     </span>
                   )}
                 </div>
               </div>
             );
           })}
-        </div>
-
-        {/* Anti-Slop Disclaimer Box */}
-        <div className="mt-8 p-4 rounded-[8px] bg-[#F1F1EE]/80 border border-[#DEDFDA] flex items-center gap-3 text-xs text-[#6B7078]">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#3156D9] shrink-0"></span>
-          <span>{t.disclaimer}</span>
         </div>
       </div>
     </section>

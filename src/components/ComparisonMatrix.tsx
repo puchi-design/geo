@@ -68,37 +68,37 @@ export const ComparisonMatrix: React.FC<ComparisonMatrixProps> = ({ currentLang 
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-[#FFFFFF] border-b border-[#DEDFDA]">
+    <section className="py-16 md:py-24 bg-[#0E121B] border-b border-[#202636] text-[#F3F4F6]">
       <div className="max-w-[1240px] mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-wider text-[#3156D9] mb-2 px-2.5 py-1 rounded bg-[#3156D9]/8 border border-[#3156D9]/20">
+          <div className="inline-flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-wider text-[#60A5FA] mb-2 px-2.5 py-1 rounded bg-[#161B26] border border-[#2D3548]">
             <span>SPECIFICATION BENCHMARK</span>
           </div>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#111318] tracking-tight mb-3">
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight mb-3">
             {title}
           </h2>
-          <p className="text-sm sm:text-base text-[#4B515D] leading-relaxed">
+          <p className="text-sm sm:text-base text-[#94A3B8] leading-relaxed">
             {subtitle}
           </p>
         </div>
 
         {/* Comparison Table */}
-        <div className="border border-[#DEDFDA] rounded-[12px] overflow-hidden shadow-xs bg-[#FFFFFF]">
+        <div className="border border-[#202636] rounded-[12px] overflow-hidden shadow-xl bg-[#121620]">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-[#DEDFDA] bg-[#F7F6F2]/60 text-xs font-mono">
-                  <th className="py-4 px-5 text-[#6B7078] font-semibold w-2/5">
+                <tr className="border-b border-[#202636] bg-[#0E1119] text-xs font-mono">
+                  <th className="py-4 px-5 text-[#94A3B8] font-semibold w-2/5">
                     {isZh ? '功能与架构维度' : isPt ? 'Dimensão Arquitetural' : 'Capability & Architectural Dimension'}
                   </th>
-                  <th className="py-4 px-4 text-[#6B7078] font-medium w-1/5">
+                  <th className="py-4 px-4 text-[#94A3B8] font-medium w-1/5">
                     {isZh ? '传统 SEO 爬虫工具' : isPt ? 'Ferramentas Clássicas' : 'Traditional SEO Tools'}
                   </th>
-                  <th className="py-4 px-4 text-[#6B7078] font-medium w-1/5">
+                  <th className="py-4 px-4 text-[#94A3B8] font-medium w-1/5">
                     {isZh ? '通用 AI 营销打分器' : isPt ? 'Checkers Genéricos de IA' : 'Generic AI Score Checkers'}
                   </th>
-                  <th className="py-4 px-5 text-[#3156D9] font-bold w-1/5 bg-[#EEF2FF]/60 border-l border-[#DEDFDA]">
+                  <th className="py-4 px-5 text-[#60A5FA] font-bold w-1/5 bg-[#161F33] border-l border-[#202636]">
                     <div className="flex items-center gap-1.5">
                       <Shield className="w-3.5 h-3.5 text-[#3156D9]" />
                       <span>MandAPI GEO Engine</span>
@@ -106,21 +106,21 @@ export const ComparisonMatrix: React.FC<ComparisonMatrixProps> = ({ currentLang 
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#F1F1EE] text-xs">
+              <tbody className="divide-y divide-[#1E2433] text-xs">
                 {rows.map((r, i) => (
-                  <tr key={i} className="hover:bg-[#F7F6F2]/40 transition-colors">
-                    <td className="py-4 px-5 font-medium text-[#111318]">
+                  <tr key={i} className="hover:bg-[#161B26] transition-colors">
+                    <td className="py-4 px-5 font-medium text-white">
                       {r.feature}
                     </td>
-                    <td className="py-4 px-4 text-[#6B7078] font-mono">
+                    <td className="py-4 px-4 text-[#94A3B8] font-mono">
                       {r.trad}
                     </td>
-                    <td className="py-4 px-4 text-[#A56A19] font-mono">
+                    <td className="py-4 px-4 text-[#F59E0B] font-mono">
                       {r.genericAi}
                     </td>
-                    <td className="py-4 px-5 font-semibold text-[#111318] bg-[#EEF2FF]/30 border-l border-[#DEDFDA] font-mono">
-                      <div className="flex items-center gap-2 text-[#3156D9]">
-                        <Check className="w-4 h-4 text-[#39735B] shrink-0" />
+                    <td className="py-4 px-5 font-semibold text-white bg-[#141B2E]/60 border-l border-[#202636] font-mono">
+                      <div className="flex items-center gap-2 text-[#34D399]">
+                        <Check className="w-4 h-4 text-[#10B981] shrink-0" />
                         <span>{r.geo}</span>
                       </div>
                     </td>

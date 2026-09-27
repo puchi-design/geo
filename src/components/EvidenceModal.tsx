@@ -24,6 +24,9 @@ export const EvidenceModal: React.FC<EvidenceModalProps> = ({
     impact: 'Affects crawler parsing accuracy and index status.',
   };
 
+  const isZh = currentLang === 'zh';
+  const isPt = currentLang === 'pt';
+
   const [copiedRaw, setCopiedRaw] = useState(false);
   const [copiedRemediation, setCopiedRemediation] = useState(false);
 
@@ -39,125 +42,133 @@ export const EvidenceModal: React.FC<EvidenceModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs">
-      <div className="bg-[#FFFFFF] border border-[#DEDFDA] rounded-[12px] shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
+      <div className="bg-[#121620] border border-[#262E40] rounded-[12px] shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto text-[#F3F4F6]">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-[#DEDFDA] flex items-center justify-between bg-[#F1F1EE]/60 sticky top-0 bg-[#FFFFFF] z-10">
+        <div className="px-6 py-4 border-b border-[#202636] flex items-center justify-between bg-[#0E121B] sticky top-0 z-10">
           <div className="flex items-center gap-2.5">
             {finding.severity === 'high' ? (
-              <span className="text-[10px] font-mono font-bold uppercase text-[#B64C4C] bg-[#B64C4C]/10 px-2 py-0.5 rounded-[4px]">
+              <span className="text-[10px] font-mono font-bold uppercase text-[#EF4444] bg-[#EF4444]/15 px-2 py-0.5 rounded-[4px] border border-[#EF4444]/30">
                 HIGH PRIORITY
               </span>
             ) : finding.severity === 'medium' ? (
-              <span className="text-[10px] font-mono font-bold uppercase text-[#A56A19] bg-[#A56A19]/10 px-2 py-0.5 rounded-[4px]">
+              <span className="text-[10px] font-mono font-bold uppercase text-[#F59E0B] bg-[#F59E0B]/15 px-2 py-0.5 rounded-[4px] border border-[#F59E0B]/30">
                 MEDIUM ATTENTION
               </span>
             ) : (
-              <span className="text-[10px] font-mono font-bold uppercase text-[#39735B] bg-[#39735B]/10 px-2 py-0.5 rounded-[4px]">
+              <span className="text-[10px] font-mono font-bold uppercase text-[#34D399] bg-[#10B981]/15 px-2 py-0.5 rounded-[4px] border border-[#10B981]/30">
                 PASS VERIFIED
               </span>
             )}
-            <span className="text-xs font-mono text-[#6B7078]">
-              Line {finding.line || 'header'}
+            <span className="text-xs font-mono text-[#94A3B8]">
+              Line {finding.line || '1'} · {finding.evidenceType.toUpperCase()}
             </span>
           </div>
 
           <button
             onClick={onClose}
-            className="p-1 text-[#6B7078] hover:text-[#111318] rounded-md transition-colors"
+            className="p-1 rounded-[4px] text-[#94A3B8] hover:text-white hover:bg-[#1E2433] transition-colors cursor-pointer"
             aria-label="Close modal"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
-        {/* Modal Body */}
+        {/* Content Body */}
         <div className="p-6 space-y-6">
+          {/* Title & Desc */}
           <div>
-            <h3 className="text-xl font-semibold text-[#111318] mb-2">
+            <h3 className="font-display text-xl font-bold text-white mb-2">
               {findingContent.title}
             </h3>
-            <p className="text-sm text-[#4B515D] leading-relaxed">
+            <p className="text-sm text-[#94A3B8] leading-relaxed">
               {findingContent.desc}
             </p>
           </div>
 
-          {/* Raw Capture Snippet */}
-          <div>
-            <div className="flex items-center justify-between text-xs font-mono text-[#6B7078] mb-1.5">
-              <span className="uppercase tracking-wider">
-                {t.evidenceSection.rawSnippet}
+          {/* Section 1: Raw Evidence Found */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between text-xs font-mono text-[#94A3B8]">
+              <span className="font-semibold uppercase text-white flex items-center gap-1.5">
+                <Code2 className="w-3.5 h-3.5 text-[#EF4444]" />
+                {isZh ? '原始捕获代码证据' : isPt ? 'Evidência Bruta Capturada' : 'Raw Captured Evidence'}
               </span>
               <button
                 onClick={() => copyText(finding.rawEvidence, 'raw')}
-                className="hover:text-[#111318] flex items-center gap-1 transition-colors cursor-pointer"
+                className="hover:text-white flex items-center gap-1 text-[11px] transition-colors cursor-pointer"
               >
                 {copiedRaw ? (
                   <>
-                    <Check className="w-3.5 h-3.5 text-[#39735B]" />
-                    <span className="text-[#39735B]">{t.evidenceSection.copied}</span>
+                    <Check className="w-3 h-3 text-[#34D399]" />
+                    <span className="text-[#34D399]">{t.evidenceSection.copied}</span>
                   </>
                 ) : (
                   <>
-                    <Copy className="w-3.5 h-3.5" />
+                    <Copy className="w-3 h-3" />
                     <span>{t.evidenceSection.copyCode}</span>
                   </>
                 )}
               </button>
             </div>
-            <pre className="bg-[#F7F6F2] border border-[#DEDFDA] rounded-[6px] p-3 text-xs font-mono text-[#30343B] overflow-x-auto whitespace-pre">
+
+            <div className="bg-[#0E121B] border border-[#202636] rounded-[6px] p-3 text-xs font-mono text-[#E2E8F0] overflow-x-auto whitespace-pre">
               <code>{finding.rawEvidence}</code>
-            </pre>
+            </div>
           </div>
 
-          {/* Impact and Remediation */}
-          {finding.remediationCode && (
-            <div>
-              <div className="flex items-center justify-between text-xs font-mono text-[#3156D9] mb-1.5">
-                <span className="uppercase tracking-wider font-semibold">
+          {/* Section 2: Why it matters */}
+          <div className="space-y-2">
+            <span className="block text-xs font-mono font-semibold uppercase text-white">
+              {t.evidenceSection.whyItMatters}
+            </span>
+            <div className="p-3.5 rounded-[8px] bg-[#161B26] border border-[#262E40] text-xs text-[#CBD5E1] leading-relaxed">
+              {findingContent.impact}
+            </div>
+          </div>
+
+          {/* Section 3: Recommended PR Patch */}
+          {findingContent.remediation && (
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-xs font-mono text-[#94A3B8]">
+                <span className="font-semibold uppercase text-[#34D399] flex items-center gap-1.5">
+                  <Check className="w-3.5 h-3.5 text-[#34D399]" />
                   {t.evidenceSection.remediationLabel}
                 </span>
                 <button
-                  onClick={() => copyText(finding.remediationCode!, 'remediation')}
-                  className="hover:text-[#2648BC] flex items-center gap-1 transition-colors cursor-pointer"
+                  onClick={() => copyText(findingContent.remediation, 'remediation')}
+                  className="hover:text-white flex items-center gap-1 text-[11px] transition-colors cursor-pointer"
                 >
                   {copiedRemediation ? (
                     <>
-                      <Check className="w-3.5 h-3.5 text-[#39735B]" />
-                      <span className="text-[#39735B]">{t.evidenceSection.copied}</span>
+                      <Check className="w-3 h-3 text-[#34D399]" />
+                      <span className="text-[#34D399]">{t.evidenceSection.copied}</span>
                     </>
                   ) : (
                     <>
-                      <Copy className="w-3.5 h-3.5" />
+                      <Copy className="w-3 h-3" />
                       <span>{t.evidenceSection.copyCode}</span>
                     </>
                   )}
                 </button>
               </div>
-              <pre className="bg-[#FFFFFF] border border-[#3156D9]/30 rounded-[6px] p-3 text-xs font-mono text-[#111318] overflow-x-auto whitespace-pre">
-                <code>{finding.remediationCode}</code>
-              </pre>
+
+              <div className="bg-[#0E121B] border border-[#202636] rounded-[6px] p-3 text-xs font-mono text-[#34D399] overflow-x-auto whitespace-pre">
+                <code>{findingContent.remediation}</code>
+              </div>
             </div>
           )}
-
-          {/* Root cause / Why it matters */}
-          <div className="bg-[#F1F1EE]/70 border border-[#DEDFDA] rounded-[8px] p-4 text-xs">
-            <span className="block font-mono font-semibold text-[#111318] uppercase tracking-wider mb-1">
-              {t.evidenceSection.whyItMatters}
-            </span>
-            <p className="text-[#4B515D] leading-relaxed">
-              {findingContent.impact}
-            </p>
-          </div>
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-3 border-t border-[#DEDFDA] bg-[#F1F1EE]/40 flex justify-end">
+        <div className="px-6 py-3.5 border-t border-[#202636] bg-[#0E121B] flex items-center justify-between">
+          <span className="text-[11px] font-mono text-[#64748B]">
+            Assertion Rule: {finding.category.toUpperCase()}_CHECK
+          </span>
           <button
             onClick={onClose}
-            className="px-4 py-2 text-xs font-semibold text-[#111318] bg-[#FFFFFF] border border-[#DEDFDA] hover:bg-[#F1F1EE] rounded-md transition-colors cursor-pointer"
+            className="px-4 py-1.5 rounded-[6px] bg-[#1E2433] hover:bg-[#283247] text-white text-xs font-mono font-medium transition-colors cursor-pointer"
           >
-            Close
+            {isZh ? '关闭' : isPt ? 'Fechar' : 'Close'}
           </button>
         </div>
       </div>

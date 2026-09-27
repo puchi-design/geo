@@ -64,75 +64,81 @@ ${report.bots.map((b) => `- **${b.botName}**: ${b.status.toUpperCase()} (${b.age
   };
 
   const handleDownload = () => {
+    const filename = `mandapi-geo-${report.url.replace(/https?:\/\//, '').replace(/[^a-zA-Z0-9]/g, '_')}.${
+      format === 'json' ? 'json' : 'md'
+    }`;
     const blob = new Blob([currentContent], {
       type: format === 'json' ? 'application/json' : 'text/markdown',
     });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `mandapi-geo-audit-${new Date().toISOString().split('T')[0]}.${format === 'json' ? 'json' : 'md'}`;
-    a.click();
-    URL.revokeObjectURL(url);
+    const href = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = href;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(href);
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs">
-      <div className="bg-[#FFFFFF] border border-[#DEDFDA] rounded-[12px] shadow-xl w-full max-w-2xl max-h-[85vh] flex flex-col">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
+      <div className="bg-[#121620] border border-[#262E40] rounded-[12px] shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden text-[#F3F4F6]">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-[#DEDFDA] flex items-center justify-between bg-[#F1F1EE]/60">
+        <div className="px-6 py-4 border-b border-[#202636] flex items-center justify-between bg-[#0E121B]">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-sm text-[#111318]">
-              Export Audit Findings
+            <span className="font-display font-bold text-base text-white">
+              Export Audit Evidence
             </span>
-            <span className="text-xs font-mono text-[#6B7078]">
-              {report.url.replace(/^https?:\/\//, '')}
+            <span className="text-xs font-mono text-[#94A3B8]">
+              ({report.url.replace(/^https?:\/\//, '')})
             </span>
           </div>
 
           <button
             onClick={onClose}
-            className="p-1 text-[#6B7078] hover:text-[#111318] rounded-md transition-colors"
+            className="p-1 rounded-[4px] text-[#94A3B8] hover:text-white hover:bg-[#1E2433] transition-colors cursor-pointer"
+            aria-label="Close modal"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
-        {/* Format Selector */}
-        <div className="px-6 py-3 border-b border-[#DEDFDA] flex items-center justify-between bg-[#FFFFFF]">
-          <div className="flex items-center gap-1 border border-[#DEDFDA] rounded-md p-1 bg-[#F1F1EE] text-xs font-mono">
+        {/* Format Selector Bar */}
+        <div className="px-6 py-3 border-b border-[#202636] bg-[#141824] flex items-center justify-between">
+          <div className="flex items-center gap-1 bg-[#0E121B] border border-[#262E40] rounded-md p-0.5 text-xs font-mono">
             <button
               onClick={() => setFormat('json')}
-              className={`flex items-center gap-1 px-3 py-1 rounded-[4px] font-medium transition-all ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded transition-all cursor-pointer ${
                 format === 'json'
-                  ? 'bg-[#FFFFFF] text-[#111318] shadow-xs'
-                  : 'text-[#6B7078] hover:text-[#111318]'
+                  ? 'bg-[#3156D9] text-white font-semibold'
+                  : 'text-[#94A3B8] hover:text-white'
               }`}
             >
               <FileJson className="w-3.5 h-3.5" />
-              JSON Payload
+              <span>JSON Payload</span>
             </button>
             <button
               onClick={() => setFormat('markdown')}
-              className={`flex items-center gap-1 px-3 py-1 rounded-[4px] font-medium transition-all ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded transition-all cursor-pointer ${
                 format === 'markdown'
-                  ? 'bg-[#FFFFFF] text-[#111318] shadow-xs'
-                  : 'text-[#6B7078] hover:text-[#111318]'
+                  ? 'bg-[#3156D9] text-white font-semibold'
+                  : 'text-[#94A3B8] hover:text-white'
               }`}
             >
               <FileText className="w-3.5 h-3.5" />
-              Markdown Report
+              <span>Markdown Summary</span>
             </button>
           </div>
 
           <div className="flex items-center gap-2">
             <button
               onClick={handleCopy}
-              className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-[#111318] bg-[#FFFFFF] border border-[#DEDFDA] hover:bg-[#F1F1EE] rounded-md transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-[6px] border border-[#262E40] bg-[#181D2A] text-xs font-mono text-white hover:bg-[#202738] transition-colors cursor-pointer"
             >
               {copied ? (
                 <>
-                  <Check className="w-3.5 h-3.5 text-[#39735B]" />
-                  <span className="text-[#39735B]">Copied</span>
+                  <Check className="w-3.5 h-3.5 text-[#34D399]" />
+                  <span className="text-[#34D399]">Copied</span>
                 </>
               ) : (
                 <>
@@ -141,21 +147,33 @@ ${report.bots.map((b) => `- **${b.botName}**: ${b.status.toUpperCase()} (${b.age
                 </>
               )}
             </button>
+
             <button
               onClick={handleDownload}
-              className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-white bg-[#3156D9] hover:bg-[#2648BC] rounded-md transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-[6px] bg-[#3156D9] hover:bg-[#2546BC] text-xs font-mono text-white font-semibold transition-colors cursor-pointer"
             >
               <Download className="w-3.5 h-3.5" />
-              <span>Download</span>
+              <span>Download .{format === 'json' ? 'json' : 'md'}</span>
             </button>
           </div>
         </div>
 
-        {/* Content Preview */}
-        <div className="p-6 overflow-y-auto flex-1 bg-[#F7F6F2]">
-          <pre className="text-xs font-mono text-[#30343B] bg-[#FFFFFF] p-4 rounded-[8px] border border-[#DEDFDA] overflow-x-auto whitespace-pre leading-relaxed">
+        {/* Code Preview Box */}
+        <div className="p-6 flex-1 overflow-y-auto font-mono text-xs bg-[#0E121B]">
+          <pre className="text-[#CBD5E1] whitespace-pre-wrap leading-relaxed">
             <code>{currentContent}</code>
           </pre>
+        </div>
+
+        {/* Footer */}
+        <div className="px-6 py-3 border-t border-[#202636] bg-[#0E121B] flex items-center justify-between text-[11px] font-mono text-[#64748B]">
+          <span>Exported format is schema-compliant for automated CI checks</span>
+          <button
+            onClick={onClose}
+            className="text-[#94A3B8] hover:text-white transition-colors cursor-pointer"
+          >
+            Close
+          </button>
         </div>
       </div>
     </div>

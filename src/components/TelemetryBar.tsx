@@ -39,40 +39,40 @@ export const TelemetryBar: React.FC<TelemetryBarProps> = ({ currentLang }) => {
   ];
 
   const crawlerAgents = [
-    { name: 'OAI-SearchBot', status: 'Active (200 OK)', color: 'text-[#39735B]' },
-    { name: 'PerplexityBot', status: 'Active (200 OK)', color: 'text-[#39735B]' },
-    { name: 'Claude-SearchBot', status: 'Monitoring', color: 'text-[#3156D9]' },
-    { name: 'Google-Extended', status: 'Active (200 OK)', color: 'text-[#39735B]' },
-    { name: 'Applebot-Extended', status: 'Compliant', color: 'text-[#39735B]' },
-    { name: 'Bytespider', status: 'Indexed', color: 'text-[#39735B]' },
+    { name: 'OAI-SearchBot', status: 'Active (200 OK)', color: 'text-[#34D399]' },
+    { name: 'PerplexityBot', status: 'Active (200 OK)', color: 'text-[#34D399]' },
+    { name: 'Claude-SearchBot', status: 'Monitoring', color: 'text-[#60A5FA]' },
+    { name: 'Google-Extended', status: 'Active (200 OK)', color: 'text-[#34D399]' },
+    { name: 'Applebot-Extended', status: 'Compliant', color: 'text-[#34D399]' },
+    { name: 'Bytespider', status: 'Indexed', color: 'text-[#34D399]' },
   ];
 
   return (
-    <section className="border-b border-[#DEDFDA] bg-[#FFFFFF] py-6 relative overflow-hidden">
+    <section className="border-b border-[#202636] bg-[#0E121B] py-6 relative overflow-hidden text-[#F3F4F6]">
       <div className="max-w-[1240px] mx-auto px-4 sm:px-6">
-        {/* Metric Cards Row (Siteimprove / Semrush high-density telemetry) */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 pb-6 border-b border-[#F1F1EE]">
+        {/* Metric Cards Row */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 pb-6 border-b border-[#1E2433]">
           {metrics.map((m, idx) => {
             const Icon = m.icon;
             return (
               <div
                 key={idx}
-                className="p-3.5 rounded-[8px] bg-[#F7F6F2]/40 border border-[#DEDFDA]/70 hover:border-[#3156D9]/40 hover:bg-[#FFFFFF] transition-all"
+                className="p-3.5 rounded-[8px] bg-[#141824] border border-[#262E40] hover:border-[#3156D9] hover:bg-[#181D2C] transition-all"
               >
                 <div className="flex items-center gap-2 mb-1.5">
-                  <div className="p-1 rounded-[4px] bg-[#FFFFFF] border border-[#DEDFDA] text-[#3156D9]">
+                  <div className="p-1 rounded-[4px] bg-[#0E121B] border border-[#262E40] text-[#60A5FA]">
                     <Icon className="w-3.5 h-3.5" />
                   </div>
-                  <span className="text-[11px] font-mono uppercase tracking-wider text-[#6B7078] truncate">
+                  <span className="text-[11px] font-mono uppercase tracking-wider text-[#94A3B8] truncate">
                     {m.label}
                   </span>
                 </div>
                 <div className="flex items-baseline gap-2">
-                  <span className="font-display text-xl font-bold text-[#111318] tracking-tight">
+                  <span className="font-display text-xl font-bold text-white tracking-tight">
                     {m.value}
                   </span>
                 </div>
-                <p className="text-[11px] text-[#6B7078] font-mono mt-0.5 truncate">
+                <p className="text-[11px] text-[#94A3B8] font-mono mt-0.5 truncate">
                   {m.sub}
                 </p>
               </div>
@@ -87,20 +87,20 @@ export const TelemetryBar: React.FC<TelemetryBarProps> = ({ currentLang }) => {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#10B981]"></span>
             </span>
-            <span className="font-semibold text-[#111318]">
+            <span className="font-semibold text-white">
               {isZh ? 'AI 搜索引擎爬虫实时监听网络' : isPt ? 'Rede de Rastreadores de IA Ativa' : 'Live AI Crawler Network Telemetry'}
             </span>
-            <span className="text-[#DEDFDA]">|</span>
-            <span className="text-[#6B7078]">v4.2 Engine</span>
+            <span className="text-[#3B4660]">|</span>
+            <span className="text-[#94A3B8]">v4.2 Engine</span>
           </div>
 
           <div className="flex items-center gap-3 overflow-x-auto pb-1 md:pb-0 scrollbar-none text-[11px]">
             {crawlerAgents.map((bot, i) => (
               <div
                 key={i}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] bg-[#F7F6F2] border border-[#DEDFDA] shrink-0 text-[#30343B]"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] bg-[#141824] border border-[#262E40] shrink-0 text-[#CBD5E1]"
               >
-                <span className="font-medium">{bot.name}:</span>
+                <span className="font-medium text-[#94A3B8]">{bot.name}:</span>
                 <span className={`font-semibold ${bot.color}`}>{bot.status}</span>
               </div>
             ))}
