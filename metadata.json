@@ -1,0 +1,6 @@
+{
+  "name": "MandAPI GEO",
+  "description": "Technical SEO and AI Search Readiness Engineering Tool — See what search engines see. Know what to change next.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

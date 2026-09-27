@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg: #F7F6F2;
+    --surface: #FFFFFF;
+    --surface-secondary: #F1F1EE;
+    --ink: #111318;
+    --text: #30343B;
+    --muted: #6B7078;
+    --subtle: #969AA1;
+    --primary: #3156D9;
+    --primary-hover: #2648BC;
+    --primary-soft: #EEF2FF;
+    --border: #DEDFDA;
+    --border-strong: #C8CAC4;
+    --success: #39735B;
+    --warning: #A56A19;
+    --danger: #B64C4C;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Noto Sans SC', 'PingFang SC', sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .font-display {
+    font-family: 'Space Grotesk', 'Plus Jakarta Sans', -apple-system, sans-serif;
+    letter-spacing: -0.035em;
+  }
+
+  code, pre, kbd, samp, .font-mono {
+    font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Subtle Engineering Grid background */
+.tech-grid-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(200, 202, 196, 0.28) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(200, 202, 196, 0.28) 1px, transparent 1px);
+}
+
+.tech-dots-pattern {
+  background-image: radial-gradient(rgba(49, 86, 217, 0.12) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Subtle scanning laser line effect for audits */
+@keyframes laser-sweep {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.8;
+  }
+  85% {
+    opacity: 0.8;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+.animate-laser {
+  animation: laser-sweep 2.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Custom scrollbars for code snippets & inspector panels */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #DEDFDA;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C8CAC4;
+}
